@@ -96,6 +96,10 @@ public class XMLConfigBuilder extends BaseBuilder {
     return configuration;
   }
 
+  /**
+   * 解析 mybatis-config.xml 配置文件
+   * @param root
+   */
   private void parseConfiguration(XNode root) {
     try {
       //issue #117 read properties first
@@ -105,6 +109,7 @@ public class XMLConfigBuilder extends BaseBuilder {
       objectFactoryElement(root.evalNode("objectFactory"));
       objectWrapperFactoryElement(root.evalNode("objectWrapperFactory"));
       reflectionFactoryElement(root.evalNode("reflectionFactory"));
+      //读取settings配置
       settingsElement(root.evalNode("settings"));
       // read it after objectFactory and objectWrapperFactory issue #631
       environmentsElement(root.evalNode("environments"));

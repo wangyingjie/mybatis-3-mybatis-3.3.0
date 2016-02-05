@@ -70,6 +70,8 @@ public class RoutingStatementHandler implements StatementHandler {
 
   @Override
   public int update(Statement statement) throws SQLException {
+
+    //Sql 最终执行处理逻辑
     return delegate.update(statement);
   }
 

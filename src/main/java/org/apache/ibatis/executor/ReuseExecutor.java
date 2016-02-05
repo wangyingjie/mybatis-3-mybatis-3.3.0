@@ -70,13 +70,25 @@ public class ReuseExecutor extends BaseExecutor {
 
   private Statement prepareStatement(StatementHandler handler, Log statementLog) throws SQLException {
     Statement stmt;
+
+    //解析数据执行sql
     BoundSql boundSql = handler.getBoundSql();
+
+    //获取 sql
     String sql = boundSql.getSql();
     if (hasStatementFor(sql)) {
+
+      //从缓存获取 stmt
       stmt = getStatement(sql);
     } else {
+
+      //获取数据库链接池
       Connection connection = getConnection(statementLog);
+
+      //对数据库连接池进行预处理，包括设置查询超时时间
       stmt = handler.prepare(connection);
+
+      //将sql 放进缓存
       putStatement(sql, stmt);
     }
     handler.parameterize(stmt);
@@ -85,6 +97,8 @@ public class ReuseExecutor extends BaseExecutor {
 
   private boolean hasStatementFor(String sql) {
     try {
+
+      //判断缓存中是否已经具有相同的 sql && 数据库链接还没有关闭
       return statementMap.keySet().contains(sql) && !statementMap.get(sql).getConnection().isClosed();
     } catch (SQLException e) {
       return false;

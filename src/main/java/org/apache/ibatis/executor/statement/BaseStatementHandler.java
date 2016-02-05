@@ -86,6 +86,8 @@ public abstract class BaseStatementHandler implements StatementHandler {
     Statement statement = null;
     try {
       statement = instantiateStatement(connection);
+
+      //设置查询超时时间
       setStatementTimeout(statement);
       setFetchSize(statement);
       return statement;
@@ -101,7 +103,9 @@ public abstract class BaseStatementHandler implements StatementHandler {
   protected abstract Statement instantiateStatement(Connection connection) throws SQLException;
 
   protected void setStatementTimeout(Statement stmt) throws SQLException {
+
     Integer timeout = mappedStatement.getTimeout();
+    // mybatis-config.xml 配置文件中设置的查询超时时间
     Integer defaultTimeout = configuration.getDefaultStatementTimeout();
     if (timeout != null) {
       stmt.setQueryTimeout(timeout);
