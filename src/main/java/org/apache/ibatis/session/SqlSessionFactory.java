@@ -35,6 +35,7 @@ public interface SqlSessionFactory {
   SqlSession openSession(ExecutorType execType, TransactionIsolationLevel level);
   SqlSession openSession(ExecutorType execType, Connection connection);
 
+  //获取 configuration 配置信息
   Configuration getConfiguration();
 
 }
