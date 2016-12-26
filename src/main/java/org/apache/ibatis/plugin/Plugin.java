@@ -28,7 +28,7 @@ import org.apache.ibatis.reflection.ExceptionUtil;
 /**
  * @author Clinton Begin
  */
-public class Plugin implements InvocationHandler {
+public class Plugin implements InvocationHandler {//实现jdk动态代理接口  InvocationHandler
 
   private Object target;
   private Interceptor interceptor;
@@ -45,6 +45,8 @@ public class Plugin implements InvocationHandler {
     Class<?> type = target.getClass();
     Class<?>[] interfaces = getAllInterfaces(type, signatureMap);
     if (interfaces.length > 0) {
+
+      // 构建代理对象
       return Proxy.newProxyInstance(
           type.getClassLoader(),
           interfaces,

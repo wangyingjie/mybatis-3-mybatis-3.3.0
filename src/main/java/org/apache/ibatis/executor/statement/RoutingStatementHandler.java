@@ -30,11 +30,15 @@ import org.apache.ibatis.session.RowBounds;
 
 /**
  * @author Clinton Begin
+ *
+ * 适配器模式的具体实现
  */
 public class RoutingStatementHandler implements StatementHandler {
 
+  //委托代理模式
   private final StatementHandler delegate;
 
+  //该类相当于是一个适配器类
   public RoutingStatementHandler(Executor executor, MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) {
 
     switch (ms.getStatementType()) {
