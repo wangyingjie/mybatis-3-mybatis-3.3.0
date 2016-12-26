@@ -131,6 +131,7 @@ public class XMLConfigBuilder extends BaseBuilder {
           String alias = child.getStringAttribute("alias");
           String type = child.getStringAttribute("type");
           try {
+            //注册sqlMap中用到的别名信息
             Class<?> clazz = Resources.classForName(type);
             if (alias == null) {
               typeAliasRegistry.registerAlias(clazz);
@@ -152,6 +153,7 @@ public class XMLConfigBuilder extends BaseBuilder {
         Properties properties = child.getChildrenAsProperties();
         Interceptor interceptorInstance = (Interceptor) resolveClass(interceptor).newInstance();
         interceptorInstance.setProperties(properties);
+        //解析到 plugin插件，将plugin插件添加到 InterceptorChain 里面
         configuration.addInterceptor(interceptorInstance);
       }
     }
