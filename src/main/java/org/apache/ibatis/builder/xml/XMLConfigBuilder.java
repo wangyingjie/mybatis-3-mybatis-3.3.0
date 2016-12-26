@@ -153,7 +153,7 @@ public class XMLConfigBuilder extends BaseBuilder {
         Properties properties = child.getChildrenAsProperties();
         Interceptor interceptorInstance = (Interceptor) resolveClass(interceptor).newInstance();
         interceptorInstance.setProperties(properties);
-        //解析到 plugin插件，将plugin插件添加到 InterceptorChain 里面
+
         configuration.addInterceptor(interceptorInstance);
       }
     }
