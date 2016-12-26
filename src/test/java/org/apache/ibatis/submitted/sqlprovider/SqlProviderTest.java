@@ -31,6 +31,9 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+/**
+ * 该测试类利用了注解的方式  Mapper 中的方法注解会调用到  OurSqlBuilder 中的方法
+ */
 public class SqlProviderTest {
 
   private static SqlSessionFactory sqlSessionFactory;

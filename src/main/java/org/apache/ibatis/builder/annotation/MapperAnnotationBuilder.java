@@ -125,6 +125,8 @@ public class MapperAnnotationBuilder {
         try {
           // issue #237
           if (!method.isBridge()) {
+            // 获取Mapper 接口上定义的注解类型，通过注解可以指定 sql 的提供者；
+            // 例如：org.apache.ibatis.submitted.sqlprovider.SqlProviderTest 测试用例
             parseStatement(method);
           }
         } catch (IncompleteElementException e) {
